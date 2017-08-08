@@ -1,8 +1,8 @@
 {
   "name": "com.catalearn.dashboard",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Catalearn",
+  "homepage": "http://catalearn.com/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -36,5 +36,5 @@
     "ionic": "3.7.0",
     "typescript": "2.3.4"
   },
-  "description": "An Ionic project"
+  "description": "A Catalearn project built by the Catalearn team"
 }

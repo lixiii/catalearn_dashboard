@@ -15,22 +15,20 @@ import { UserPage } from '../pages/user/user';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = DashboardPage;
+  rootPage: any = LoginPage;
 
-  pages: Array<{title: string, component: any}>;
+  authPages = [
+      { title: 'Log in', component: LoginPage, icon: "log-in" },
+      { title: "Sign up", component: SignupPage, icon: "add-circle"}
+    ];
+
+  loggedInPages = [
+      { title: 'Dashboard', component: DashboardPage, icon: "cog" },
+      { title: 'User', component: UserPage, icon: "contact" }
+  ]
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
     this.initializeApp();
-
-    // used for an example of ngFor and navigation
-    this.pages = [
-      { title: 'Dashboard', component: DashboardPage },
-      { title: 'Login', component: LoginPage },
-      { title: 'User', component: UserPage },
-      { title: "Signup", component: SignupPage},
-      { title: "List", component: ListPage}
-    ];
-
   }
 
   initializeApp() {

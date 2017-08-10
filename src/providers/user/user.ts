@@ -10,7 +10,7 @@ import 'rxjs/add/operator/map';
 */
 @Injectable()
 export class UserProvider {
-
+  private _APILocation = "localhost/";
   constructor(public http: Http) {
     console.log('Hello UserProvider Provider');
   }

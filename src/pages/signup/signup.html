@@ -7,12 +7,49 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>signup</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Sign up for Catalearn</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+  <ion-grid>
+    <ion-row padding>
+      <ion-col>
+        <ion-list>
 
+          <ion-item class="login-input">
+            <ion-label floating>
+              <ion-icon name="contact"></ion-icon> Username</ion-label>
+            <ion-input type="text" [(ngModel)]="signup.username" ></ion-input>
+          </ion-item>
+
+          <ion-item class="login-input">
+            <ion-label floating>
+              <ion-icon name="key"></ion-icon> Password</ion-label>
+            <ion-input type="password" [(ngModel)]="signup.password"></ion-input>
+          </ion-item>
+
+          <ion-item class="login-input">
+            <ion-label floating>
+              <ion-icon name="mail"></ion-icon> Email Address</ion-label>
+            <ion-input type="email" [(ngModel)]="signup.email"></ion-input>
+          </ion-item>
+
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button ion-button icon-left large block color="main" (click)="signUp()">
+          <ion-icon name="add-circle"></ion-icon>
+           Sign up
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

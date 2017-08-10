@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { UserProvider } from '../../providers/user/user';
 import { SignupPage } from '../signup/signup';
 
 /**
@@ -18,7 +19,7 @@ import { SignupPage } from '../signup/signup';
 export class LoginPage {
   login = { username: "", password: "" };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private UserService: UserProvider) {
   }
 
   ionViewDidLoad() {
@@ -33,6 +34,10 @@ export class LoginPage {
       username: this.login.username,
       password: this.login.password
     } )
+  }
+
+  logIn() {
+    this.UserService.authenticate( this.login.username, this.login.password );
   }
 
 }

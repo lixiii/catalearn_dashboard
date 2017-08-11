@@ -37,7 +37,12 @@ export class LoginPage {
   }
 
   logIn() {
-    this.UserService.authenticate( this.login.username, this.login.password );
+    this.UserService.authenticate( this.login.username, this.login.password ).then( ( res ) => {
+      console.log(res);
+    } ) .catch( (error) => {
+      console.log(error);
+    })
+      ;
   }
 
 }

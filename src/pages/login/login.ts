@@ -44,7 +44,7 @@ export class LoginPage {
         // if authenticated
         if ( isAuthenticated ) {
 
-          this.navCtrl.push( DashboardPage );
+          this.navCtrl.setRoot( DashboardPage );
           
         } else {
 

@@ -1,3 +1,4 @@
+import { UserProvider } from '../../providers/user/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -15,11 +16,14 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UserPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  isAuthenticated: Boolean = false;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, private userProvider: UserProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UserPage');
+    this.isAuthenticated = this.userProvider.isAuthenticated;
   }
 
 }

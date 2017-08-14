@@ -1,5 +1,6 @@
+import { DashboardPage } from '../dashboard/dashboard';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { UserProvider } from '../../providers/user/user';
 import { SignupPage } from '../signup/signup';
@@ -19,7 +20,7 @@ import { SignupPage } from '../signup/signup';
 export class LoginPage {
   login = { username: "", password: "" };
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private UserService: UserProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private UserService: UserProvider, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -37,11 +38,35 @@ export class LoginPage {
   }
 
   logIn() {
-    this.UserService.authenticate( this.login.username, this.login.password ).then( ( res ) => {
-      console.log(res);
-    } ) .catch( (error) => {
-      console.log(error);
-    })
+    this.UserService.authenticate( this.login.username, this.login.password ).subscribe( 
+      isAuthenticated => {
+
+        // if authenticated
+        if ( isAuthenticated ) {
+
+          this.navCtrl.push( DashboardPage );
+          
+        } else {
+
+          this.alertCtrl.create({
+            title: "Whoooooops!",
+            subTitle: "You have had a type! Please try again! ",
+            buttons: ["Sure!"]
+          }).present();
+
+        }
+      
+      }, error => {
+
+        this.alertCtrl.create({
+          title: "Whoooooops!",
+          subTitle: "Something went wrong with our servers. We are trying to fix it right now. Please try again later ",
+          buttons: ["No worries!"]
+        }).present();
+
+    }, () => {
+      // console.log('finished');
+    } )
       ;
   }
 

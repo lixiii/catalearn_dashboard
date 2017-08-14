@@ -58,11 +58,23 @@ export class LoginPage {
       
       }, error => {
 
-        this.alertCtrl.create({
-          title: "Whoooooops!",
-          subTitle: "Something went wrong with our servers. We are trying to fix it right now. Please try again later ",
-          buttons: ["No worries!"]
-        }).present();
+        if ( error.status === 400 || error.status === 401 ) {
+          // unauthorized
+          this.alertCtrl.create({
+            title: "Whoooooops!",
+            subTitle: "You have had a typo! Please try again! ",
+            buttons: ["Sure!"]
+          }).present();
+        }
+        else {
+          // genuin server error
+          this.alertCtrl.create({
+            title: "Whoooooops!",
+            subTitle: "Something went wrong with our servers. We are trying to fix it right now. Please try again later ",
+            buttons: ["No worries!"]
+          }).present();
+        }
+        
 
     }, () => {
       // console.log('finished');

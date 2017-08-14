@@ -1,9 +1,9 @@
 import { HttpModule } from '@angular/http';
-import { ErrorHandler, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicModule, AlertController } from 'ionic-angular';
 
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ListPage } from '../pages/list/list';
@@ -39,8 +39,9 @@ import { MyApp } from './app.component';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
-    UserProvider
+    // {provide: ErrorHandler, useClass: IonicErrorHandler},
+    UserProvider,
+    AlertController
   ]
 })
 export class AppModule {}

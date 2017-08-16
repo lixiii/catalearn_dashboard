@@ -14,15 +14,11 @@ export class UserProvider {
   }
   
   authenticate (username: String, password: String): Observable<Boolean> {
-    var headers = new Headers();
-    // headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    headers.append('Content-Type', 'application/json');
-    
+
     return this.http.post( `${ this._APILocation }/api/admin/authenticate`, {
       username: username,
       password: password
-    })
-    .map( response => {
+    }).map( response => {
       if ( response.ok ) {
         // user is authenticated
         this.isAuthenticated = true;
@@ -35,6 +31,17 @@ export class UserProvider {
     });
   }
 
+
+  signup (username: String, password: String, email: String): Observable<Object> {
+
+    return this.http.post( `${ this._APILocation }/api/admin/signup`, {
+      username: username,
+      password: password,
+      email: email
+    }).map( response => response);
+
+  }
+  
   private publishAuthStatus() {
     // announce to subscribers that isAuthenticated has changed
     this.authStatusSubject.next( { isAuthenticated: this.isAuthenticated } );

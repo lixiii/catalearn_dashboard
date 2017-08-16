@@ -38,7 +38,13 @@ export class UserProvider {
       username: username,
       password: password,
       email: email
-    }).map( response => response);
+    }).map( response => {
+      if( response.ok ) {
+        this.isAuthenticated = true;
+        this.publishAuthStatus();
+      }
+      return response;
+    } );
 
   }
   

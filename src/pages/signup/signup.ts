@@ -1,6 +1,8 @@
-import { UserProvider } from '../../providers/user/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { UserProvider } from '../../providers/user/user';
+import { DashboardPage } from '../dashboard/dashboard';
 
 /**
  * Generated class for the SignupPage page.
@@ -33,7 +35,7 @@ export class SignupPage {
   signUp() {
 
     this.userProvider.signup( this.userInput.username, this.userInput.password, this.userInput.email ).subscribe( response => {
-      debugger;
+      this.navCtrl.setRoot( DashboardPage );      
     }, error => {
       this.alertCtrl.create({
         title: "Whoooooops!",

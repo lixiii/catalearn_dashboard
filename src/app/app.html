@@ -11,10 +11,18 @@
         <ion-list-header>
           Account
         </ion-list-header>
-        <button menuClose ion-item *ngFor="let p of authPages" (click)="openPage(p)">
-          <ion-icon item-left large [name]="p.icon"></ion-icon>
-          {{p.title}}
-        </button>
+        <ng-container *ngIf="! isAuthenticated">
+          <button menuClose ion-item *ngFor="let p of authPages" (click)="openPage(p)" >
+            <ion-icon item-left large [name]="p.icon"></ion-icon>
+            {{p.title}}
+          </button>
+        </ng-container>
+        <ng-container *ngIf="isAuthenticated">
+          <button menuClose ion-item *ngFor="let p of loggedInAuthPages" (click)="openPage(p)" >
+            <ion-icon item-left large [name]="p.icon"></ion-icon>
+            {{p.title}}
+          </button>
+        </ng-container>
       </ion-list>
 
       <ion-list>

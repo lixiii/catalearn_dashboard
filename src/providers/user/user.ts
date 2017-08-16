@@ -2,15 +2,15 @@ import 'rxjs/add/operator/map';
 
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 
 @Injectable()
 export class UserProvider {
   private _APILocation = "http://localhost";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
+  private authSubject= new Subject <any>();
 
   constructor( private http: Http ) {
-    console.log('Hello UserProvider Provider');
   }
   
   authenticate (username: String, password: String): Observable<Boolean> {
@@ -26,15 +26,19 @@ export class UserProvider {
       if ( response.ok ) {
         // user is authenticated
         this.isAuthenticated = true;
-        return true;
       } else {
         this.isAuthenticated = false;
-        return false;
       }
+
+      // announce to subscribers that isAuthenticated has changed
+      this.authSubject.next( { isAuthenticated: this.isAuthenticated } );
+      return this.isAuthenticated;
     });
   }
 
-
+  getAuthStatus(): Observable<any> {
+    return this.authSubject.asObservable();
+  }
   /**
    * Error handler
    * @private

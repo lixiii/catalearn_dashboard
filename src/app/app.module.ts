@@ -1,15 +1,15 @@
-import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { IonicApp, IonicModule, AlertController } from 'ionic-angular';
+import { AlertController, IonicApp, IonicModule } from 'ionic-angular';
 
 import { DashboardPage } from '../pages/dashboard/dashboard';
 import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
+import { ProfilePage } from '../pages/profile/profile';
 import { SignupPage } from '../pages/signup/signup';
-import { UserPage } from '../pages/user/user';
 import { UserProvider } from '../providers/user/user';
 import { MyApp } from './app.component';
 
@@ -17,7 +17,7 @@ import { MyApp } from './app.component';
   declarations: [
     MyApp,
     ListPage,
-    UserPage,
+    ProfilePage,
     LoginPage,
     SignupPage, 
     DashboardPage
@@ -31,7 +31,7 @@ import { MyApp } from './app.component';
   entryComponents: [
     MyApp,
     ListPage,
-    UserPage,
+    ProfilePage,
     LoginPage,
     SignupPage, 
     DashboardPage

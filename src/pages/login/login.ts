@@ -31,7 +31,7 @@ export class LoginPage {
    * Goes to signup page and passes the username and password to SIgnupPage
    */
   signUp() {
-    this.navCtrl.push( SignupPage, {
+    this.navCtrl.setRoot( SignupPage, {
       username: this.login.username,
       password: this.login.password
     } )

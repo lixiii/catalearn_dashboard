@@ -17,6 +17,7 @@
 
 
 <ion-content padding>
+  <form>
   <ion-grid>
     <ion-row padding>
       <ion-col>
@@ -25,13 +26,13 @@
           <ion-item class="login-input">
             <ion-label floating>
               <ion-icon name="contact"></ion-icon> Username</ion-label>
-            <ion-input type="text" [(ngModel)]="login.username" ></ion-input>
+            <ion-input type="text" [(ngModel)]="login.username" required ></ion-input>
           </ion-item>
 
           <ion-item class="login-input">
             <ion-label floating>
               <ion-icon name="key"></ion-icon> Password</ion-label>
-            <ion-input type="password" [(ngModel)]="login.password"></ion-input>
+            <ion-input type="password" [(ngModel)]="login.password" required></ion-input>
           </ion-item>
 
         </ion-list>
@@ -39,7 +40,7 @@
     </ion-row>
     <ion-row>
       <ion-col>
-        <button ion-button icon-left large block color="catalearn_secondary" (click)="logIn()" >
+        <button ion-button icon-left large block color="catalearn_secondary" (click)="logIn()" type="submit" >
           <ion-icon name="log-in"></ion-icon>
            Log-in
         </button>
@@ -53,4 +54,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  </form>
 </ion-content>

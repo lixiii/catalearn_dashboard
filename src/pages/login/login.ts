@@ -38,26 +38,20 @@ export class LoginPage {
   }
 
   logIn() {
+    // validate form input
     this.UserService.authenticate( this.login.username, this.login.password ).subscribe( 
       isAuthenticated => {
-
         // if authenticated
         if ( isAuthenticated ) {
-
           this.navCtrl.setRoot( DashboardPage );
-          
         } else {
-
           this.alertCtrl.create({
             title: "Whoooooops!",
             subTitle: "You have had a type! Please try again! ",
             buttons: ["Sure!"]
           }).present();
-
         }
-      
       }, error => {
-
         if ( error.status === 400 || error.status === 401 ) {
           // unauthorized
           this.alertCtrl.create({
@@ -74,12 +68,8 @@ export class LoginPage {
             buttons: ["No worries!"]
           }).present();
         }
-        
-
-    }, () => {
-      // console.log('finished');
-    } )
-      ;
+    });
+    
   }
 
 }

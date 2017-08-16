@@ -8,7 +8,7 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserProvider {
   private _APILocation = "http://localhost";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
-  private authSubject= new Subject <any>();
+  private authStatusSubject= new Subject <any>();
 
   constructor( private http: Http ) {
   }
@@ -30,14 +30,17 @@ export class UserProvider {
         this.isAuthenticated = false;
       }
 
-      // announce to subscribers that isAuthenticated has changed
-      this.authSubject.next( { isAuthenticated: this.isAuthenticated } );
+      this.publishAuthStatus();
       return this.isAuthenticated;
     });
   }
 
+  private publishAuthStatus() {
+    // announce to subscribers that isAuthenticated has changed
+    this.authStatusSubject.next( { isAuthenticated: this.isAuthenticated } );
+  }
   getAuthStatus(): Observable<any> {
-    return this.authSubject.asObservable();
+    return this.authStatusSubject.asObservable();
   }
   /**
    * Error handler

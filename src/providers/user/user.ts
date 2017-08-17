@@ -56,9 +56,8 @@ export class UserProvider {
   
   public getUserDetail = () => {
     this.http.get( `${ this._APILocation }/api/admin/user`, {withCredentials: true}).map( res => res ).subscribe( ( res ) => {
-      debugger;
-    }, ( error ) => {
-      debugger;
+      this.userDetail = res.json();
+      this.events.publish("auth:gotUserDetail", this.userDetail);
     } );
   }
 

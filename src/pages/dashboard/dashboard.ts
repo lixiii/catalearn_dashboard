@@ -1,5 +1,6 @@
+import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
 
 /**
  * Generated class for the DashboardPage page.
@@ -15,13 +16,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DashboardPage {
 
-  userCredit: Number = 5;
+  userCredit: Number;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events) {
+    this.events.subscribe( "auth:gotUserDetail", this.loggedinHandler);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DashboardPage');
+    console.log(this.userProvider.userDetail);
+  }
+
+  private loggedinHandler = (userDetail) => {
+    this.userCredit = userDetail.credit;
   }
 
 }

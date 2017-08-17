@@ -1,3 +1,4 @@
+import { AlertController, Events } from 'ionic-angular';
 import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -33,7 +34,8 @@ export class MyApp implements OnDestroy {
       { title: 'Dashboard', component: DashboardPage, icon: "cog" },
   ];
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private userProvider: UserProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+       private userProvider: UserProvider, private events: Events, private alertCtrl: AlertController) {
     this.initializeApp();
   }
 
@@ -44,9 +46,7 @@ export class MyApp implements OnDestroy {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.subscription = this.userProvider.getAuthStatus().subscribe( authStatus => {
-        this.isAuthenticated = authStatus.isAuthenticated;
-      } );
+      this.events.subscribe("auth:loggedIn", isAuthenticated => this.isAuthenticated = isAuthenticated );
     });
   }
 
@@ -56,7 +56,29 @@ export class MyApp implements OnDestroy {
     this.nav.setRoot(page.component);
   }
 
+  logout() {
+
+    this.alertCtrl.create( {
+      title: "Confirm logout",
+      message: "Are you sure you want to log out",
+      buttons: [
+        {
+          text: 'cancel',
+          role: 'cancel'
+        },
+        {
+          text: "Yes!",
+          handler: () => {
+            this.userProvider.logout().subscribe( () => {
+              this.isAuthenticated = false;
+            });
+          }
+        }
+      ]
+    }).present();
+  }
+
   ngOnDestroy() {
-    this.subscription.unsubscribe();
+    this.events.unsubscribe( "auth:loggedIn" );
   }
 }

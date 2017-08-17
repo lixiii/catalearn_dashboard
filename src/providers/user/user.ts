@@ -1,3 +1,4 @@
+import { Events } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import { Injectable } from '@angular/core';
@@ -8,9 +9,8 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserProvider {
   private _APILocation = "http://localhost";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
-  private authStatusSubject= new Subject <any>();
 
-  constructor( private http: Http ) {
+  constructor( private http: Http, private events: Events ) {
   }
   
   authenticate (username: String, password: String): Observable<Boolean> {
@@ -26,7 +26,7 @@ export class UserProvider {
         this.isAuthenticated = false;
       }
 
-      this.publishAuthStatus();
+      this.events.publish( "auth:loggedIn", this.isAuthenticated );
       return this.isAuthenticated;
     });
   }
@@ -41,20 +41,21 @@ export class UserProvider {
     }).map( response => {
       if( response.ok ) {
         this.isAuthenticated = true;
-        this.publishAuthStatus();
+        this.events.publish( "auth:loggedIn", this.isAuthenticated );
       }
       return response;
     } );
 
   }
+
+  logout (): Observable<any> {
+
+    return this.http.post( `${ this._APILocation }/api/admin/logout`, {}).map( res => {
+      return res;
+    } );
+
+  }
   
-  private publishAuthStatus() {
-    // announce to subscribers that isAuthenticated has changed
-    this.authStatusSubject.next( { isAuthenticated: this.isAuthenticated } );
-  }
-  getAuthStatus(): Observable<any> {
-    return this.authStatusSubject.asObservable();
-  }
   /**
    * Error handler
    * @private

@@ -22,6 +22,10 @@
             <ion-icon item-left large [name]="p.icon"></ion-icon>
             {{p.title}}
           </button>
+          <button menuClose ion-item (click)="logout()">
+            <ion-icon item-left large name="close-circle" ></ion-icon>   
+            Logout
+          </button>
         </ng-container>
       </ion-list>
 

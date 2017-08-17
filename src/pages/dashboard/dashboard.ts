@@ -1,6 +1,5 @@
-import { UserProvider } from './../../providers/user/user';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 /**
  * Generated class for the DashboardPage page.

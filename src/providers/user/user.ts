@@ -1,4 +1,4 @@
-import { Events } from 'ionic-angular';
+import { Events, Header } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import { Injectable } from '@angular/core';
@@ -9,8 +9,10 @@ import { Observable, Subject } from 'rxjs/Rx';
 export class UserProvider {
   private _APILocation = "http://localhost";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
+  public userDetail;
 
   constructor( private http: Http, private events: Events ) {
+    this.events.subscribe( "auth:loggedIn", this.getUserDetail );
   }
   
   authenticate (username: String, password: String): Observable<Boolean> {
@@ -18,7 +20,7 @@ export class UserProvider {
     return this.http.post( `${ this._APILocation }/api/admin/authenticate`, {
       username: username,
       password: password
-    }).map( response => {
+    }, {withCredentials: true}).map( response => {
       if ( response.ok ) {
         // user is authenticated
         this.isAuthenticated = true;
@@ -38,7 +40,7 @@ export class UserProvider {
       username: username,
       password: password,
       email: email
-    }).map( response => {
+    }, {withCredentials: true}).map( response => {
       if( response.ok ) {
         this.isAuthenticated = true;
         this.events.publish( "auth:loggedIn", this.isAuthenticated );
@@ -49,13 +51,17 @@ export class UserProvider {
   }
 
   logout (): Observable<any> {
-
-    return this.http.post( `${ this._APILocation }/api/admin/logout`, {}).map( res => {
-      return res;
-    } );
-
+    return this.http.post( `${ this._APILocation }/api/admin/logout`, {}, {withCredentials: true}).map( res => res as any );
   }
   
+  public getUserDetail = () => {
+    this.http.get( `${ this._APILocation }/api/admin/user`, {withCredentials: true}).map( res => res ).subscribe( ( res ) => {
+      debugger;
+    }, ( error ) => {
+      debugger;
+    } );
+  }
+
   /**
    * Error handler
    * @private

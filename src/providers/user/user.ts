@@ -14,7 +14,7 @@ export class UserProvider {
   public userDetail: UserDetail;
 
   constructor( private http: Http, private events: Events ) {
-    this.events.subscribe( "auth:loggedIn", this.getUserDetail );
+    this.events.subscribe( "auth:loggedIn", this._getUserDetail );
   }
   
   authenticate (username: String, password: String): Observable<Boolean> {
@@ -56,7 +56,7 @@ export class UserProvider {
     return this.http.post( `${ this._APILocation }/api/admin/logout`, {}, {withCredentials: true}).map( res => res as any );
   }
   
-  private getUserDetail = () => {
+  private _getUserDetail = () => {
     this.http.get( `${ this._APILocation }/api/admin/user`, {withCredentials: true}).map( res => res ).subscribe( ( res ) => {
       this.userDetail = res.json();
       this.events.publish("auth:gotUserDetail", this.userDetail);
@@ -69,6 +69,10 @@ export class UserProvider {
 
   gerUserAuthorisedHash(): String {
     return this.userDetail !== undefined && this.userDetail.authorisedHash !== undefined ? this.userDetail.authorisedHash: "none";
+  }
+
+  getUserDetail(): UserDetail | Boolean {
+    return this.userDetail !== undefined ? this.userDetail: false;
   }
 
   /**

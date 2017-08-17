@@ -34,12 +34,23 @@
           <ion-card-header>
             Your GPU Access Key
           </ion-card-header>
-          <ion-card-content >
-            <p> {{authorisedHash}} </p> 
+          <ion-card-content>
+            <p> {{authorisedHash}} </p>
           </ion-card-content>
         </ion-card>
       </ion-col>
-      
+      <ion-col col-12 col-md-6>
+        <ion-card>
+          <ion-card-header>
+            <ion-icon name="contact"></ion-icon>
+            Your account type
+          </ion-card-header>
+          <ion-card-content>
+            <h2> {{accountType | uppercase}} </h2>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
     </ion-row>
   </ion-grid>
 </ion-content>

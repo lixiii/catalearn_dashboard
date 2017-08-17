@@ -71,6 +71,7 @@ export class MyApp implements OnDestroy {
           handler: () => {
             this.userProvider.logout().subscribe( () => {
               this.isAuthenticated = false;
+              this.nav.setRoot( LoginPage );
             });
           }
         }

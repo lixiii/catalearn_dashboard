@@ -56,11 +56,19 @@ export class UserProvider {
     return this.http.post( `${ this._APILocation }/api/admin/logout`, {}, {withCredentials: true}).map( res => res as any );
   }
   
-  public getUserDetail = () => {
+  private getUserDetail = () => {
     this.http.get( `${ this._APILocation }/api/admin/user`, {withCredentials: true}).map( res => res ).subscribe( ( res ) => {
       this.userDetail = res.json();
       this.events.publish("auth:gotUserDetail", this.userDetail);
     } );
+  }
+
+  getUserCredit(): Number {
+    return this.userDetail !== undefined ? this.userDetail.credit: 0;
+  }
+
+  gerUserAuthorisedHash(): String {
+    return this.userDetail !== undefined && this.userDetail.authorisedHash !== undefined ? this.userDetail.authorisedHash: "none";
   }
 
   /**

@@ -1,15 +1,17 @@
-import { Events, Header } from 'ionic-angular';
 import 'rxjs/add/operator/map';
 
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
-import { Observable, Subject } from 'rxjs/Rx';
+import { Http } from '@angular/http';
+import { Events } from 'ionic-angular';
+import { Observable } from 'rxjs/Rx';
+
+import { UserDetail } from '../../pages/models/user.detail';
 
 @Injectable()
 export class UserProvider {
   private _APILocation = "http://localhost";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
-  public userDetail;
+  public userDetail: UserDetail;
 
   constructor( private http: Http, private events: Events ) {
     this.events.subscribe( "auth:loggedIn", this.getUserDetail );
@@ -66,8 +68,8 @@ export class UserProvider {
    * @private
    * @param error 
    */
-  private handleError(error: any): Promise<any> {
-    // console.error('An error occurred', error); // for demo purposes only
-    return Promise.reject(error.message || error);
-  }
+  // private handleError(error: any): Promise<any> {
+  //   // console.error('An error occurred', error); // for demo purposes only
+  //   return Promise.reject(error.message || error);
+  // }
 }

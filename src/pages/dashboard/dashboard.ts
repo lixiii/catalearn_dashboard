@@ -23,7 +23,7 @@ export class DashboardPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, 
     private userProvider: UserProvider ) {
-    this.events.subscribe( "auth:gotUserDetail", this.loggedinHandler);
+    this.events.subscribe( "auth:gotUserDetail", this.gotUserDetailHandler);
   }
 
   ionViewDidLoad() {
@@ -35,7 +35,7 @@ export class DashboardPage {
     }
   }
 
-  private loggedinHandler = (userDetail: UserDetail) => {
+  private gotUserDetailHandler = (userDetail: UserDetail) => {
     this.userCredit = userDetail.credit;
     this.accountType = userDetail.type;
     if ( userDetail.authorisedHash !== undefined ) {

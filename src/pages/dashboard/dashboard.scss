@@ -2,4 +2,7 @@ page-dashboard {
   .user-credit {
     font-size: 50pt
   }
+  .selectable {
+    user-select: text;
+  }
 }

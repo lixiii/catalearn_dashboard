@@ -5,6 +5,6 @@ export interface UserDetail {
   email: String;
   type: String;
   username: String;
-  authorisedHash?: String;
+  hash: String;
   transactions: Array<Transaction>;
 }

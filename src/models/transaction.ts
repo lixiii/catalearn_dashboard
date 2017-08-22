@@ -1,9 +1,10 @@
 export interface Transaction {
   id: String;
-  username: String;
+  hash: String;
   date: Date;
   amount: Number;
   type: String;
   remarks?: String;
+  username?: String;
   additionalData?: any;
 }

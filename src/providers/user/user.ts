@@ -5,11 +5,11 @@ import { Http } from '@angular/http';
 import { Events } from 'ionic-angular';
 import { Observable } from 'rxjs/Rx';
 
-import { UserDetail } from '../../pages/models/user.detail';
+import { UserDetail } from '../../models/user.detail';
 
 @Injectable()
 export class UserProvider {
-  private _APILocation = "http://localhost";  // do not add trailing slash
+  private _APILocation = "http://localhost:8080";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
   public userDetail: UserDetail;
 
@@ -67,8 +67,8 @@ export class UserProvider {
     return this.userDetail !== undefined ? this.userDetail.credit: 0;
   }
 
-  gerUserAuthorisedHash(): String {
-    return this.userDetail !== undefined && this.userDetail.authorisedHash !== undefined ? this.userDetail.authorisedHash: "none";
+  getUserHash(): String {
+    return this.userDetail !== undefined && this.userDetail.hash !== undefined ? this.userDetail.hash: "none";
   }
 
   getUserDetail(): UserDetail | Boolean {

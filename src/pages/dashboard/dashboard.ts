@@ -1,5 +1,5 @@
 import { UserProvider } from '../../providers/user/user';
-import { UserDetail } from './../models/user.detail';
+import { UserDetail } from '../../models/user.detail';
 import { Component } from '@angular/core';
 import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
@@ -18,7 +18,7 @@ import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 export class DashboardPage {
 
   public userCredit: Number;
-  public authorisedHash: String;
+  public hash: String;
   public accountType: String;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private events: Events, 
@@ -28,7 +28,7 @@ export class DashboardPage {
 
   ionViewDidLoad() {
     this.userCredit = this.userProvider.getUserCredit();
-    this.authorisedHash = this.userProvider.gerUserAuthorisedHash();
+    this.hash = this.userProvider.getUserHash();
     if ( this.userProvider.getUserDetail() ) {
       let userDetail = this.userProvider.getUserDetail() as UserDetail;
       this.accountType = userDetail.type;
@@ -38,8 +38,8 @@ export class DashboardPage {
   private gotUserDetailHandler = (userDetail: UserDetail) => {
     this.userCredit = userDetail.credit;
     this.accountType = userDetail.type;
-    if ( userDetail.authorisedHash !== undefined ) {
-      this.authorisedHash = userDetail.authorisedHash;
+    if ( userDetail.hash !== undefined ) {
+      this.hash = userDetail.hash;
     }
   }
 

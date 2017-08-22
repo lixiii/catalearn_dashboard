@@ -43,4 +43,8 @@ export class DashboardPage {
     }
   }
 
+  refresh() {
+    this.userProvider.refreshUserDetail();
+  }
+
 }

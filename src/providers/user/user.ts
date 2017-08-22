@@ -75,6 +75,10 @@ export class UserProvider {
     return this.userDetail !== undefined ? this.userDetail: false;
   }
 
+  refreshUserDetail(): void {
+    this._getUserDetail();
+  }
+
   /**
    * Error handler
    * @private

@@ -9,7 +9,8 @@ import { UserDetail } from '../../models/user.detail';
 
 @Injectable()
 export class UserProvider {
-  private _APILocation = "http://localhost:8080";  // do not add trailing slash
+  // private _APILocation = "http://localhost:8080";  // do not add trailing slash
+  private _APILocation = "http://catalearn.com";  // do not add trailing slash
   public isAuthenticated: Boolean = false;
   public userDetail: UserDetail;
 

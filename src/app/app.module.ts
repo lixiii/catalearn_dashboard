@@ -6,7 +6,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { AlertController, IonicApp, IonicModule } from 'ionic-angular';
 
 import { DashboardPage } from '../pages/dashboard/dashboard';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { ProfilePage } from '../pages/profile/profile';
 import { SignupPage } from '../pages/signup/signup';
@@ -16,7 +15,6 @@ import { MyApp } from './app.component';
 @NgModule({
   declarations: [
     MyApp,
-    ListPage,
     ProfilePage,
     LoginPage,
     SignupPage, 
@@ -30,7 +28,6 @@ import { MyApp } from './app.component';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage,
     ProfilePage,
     LoginPage,
     SignupPage, 

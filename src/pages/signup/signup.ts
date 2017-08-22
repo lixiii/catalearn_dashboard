@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { AlertController, NavController, NavParams } from 'ionic-angular';
 
 import { UserProvider } from '../../providers/user/user';
 import { DashboardPage } from '../dashboard/dashboard';
@@ -11,7 +11,6 @@ import { DashboardPage } from '../dashboard/dashboard';
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-signup',
   templateUrl: 'signup.html',

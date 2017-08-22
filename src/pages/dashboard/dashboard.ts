@@ -1,7 +1,8 @@
-import { UserProvider } from '../../providers/user/user';
-import { UserDetail } from '../../models/user.detail';
 import { Component } from '@angular/core';
-import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, NavController, NavParams } from 'ionic-angular';
+
+import { UserDetail } from '../../models/user.detail';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the DashboardPage page.
@@ -10,7 +11,6 @@ import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
  * on Ionic pages and navigation.
  */
 
-@IonicPage()
 @Component({
   selector: 'page-dashboard',
   templateUrl: 'dashboard.html',
